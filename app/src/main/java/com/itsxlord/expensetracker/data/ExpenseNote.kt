@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 data class ExpenseNote(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
-    val color: Int = 0xFFFFFFFF.toInt(), // Default white
-    val createdAt: Long = System.currentTimeMillis()
+    val color: Int = 0xFFFFFFFF.toInt(),
+    val createdAt: Long = System.currentTimeMillis(),
+    val isArchived: Boolean = false,
+    val isDeleted: Boolean = false,
+    val deletedAt: Long? = null
 )

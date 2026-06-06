@@ -3,7 +3,6 @@ package com.itsxlord.expensetracker
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -38,18 +37,17 @@ class NoteAdapter(
             val items = noteWithItems.items
             
             binding.tvNoteTitle.text = note.title
-            binding.cardNote.setCardBackgroundColor(note.color)
+            // Using a neutral color since color feature is removed
+            binding.cardNote.setCardBackgroundColor(Color.WHITE)
             
-            // Adjust text color based on background brightness for contrast
-            val isDark = ColorUtils.calculateLuminance(note.color) < 0.5
-            val textColor = if (isDark) Color.WHITE else Color.BLACK
-            val subTextColor = if (isDark) Color.argb(180, 255, 255, 255) else Color.argb(180, 0, 0, 0)
+            val textColor = Color.BLACK
+            val subTextColor = Color.argb(180, 0, 0, 0)
             
             binding.tvNoteTitle.setTextColor(textColor)
             binding.tvExpensePreview.setTextColor(subTextColor)
             
-            val strokeColor = if (isDark) Color.argb(40, 255, 255, 255) else Color.argb(40, 0, 0, 0)
-            binding.cardNote.strokeColor = strokeColor
+            // Set border color
+            binding.cardNote.strokeColor = Color.argb(40, 0, 0, 0)
             
             val currencyFormat = NumberFormat.getCurrencyInstance()
             

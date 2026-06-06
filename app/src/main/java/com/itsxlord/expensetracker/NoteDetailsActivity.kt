@@ -85,6 +85,10 @@ class NoteDetailsActivity : AppCompatActivity() {
     private fun observeNote() {
         lifecycleScope.launch {
             database.expenseDao().getNoteById(noteId).collect { note ->
+                if (note == null) {
+                    finish()
+                    return@collect
+                }
                 currentNote = note
                 supportActionBar?.title = note.title
                 updateTheme()
@@ -105,6 +109,9 @@ class NoteDetailsActivity : AppCompatActivity() {
         window.statusBarColor = bgColor
         val wic = ViewCompat.getWindowInsetsController(window.decorView)
         wic?.isAppearanceLightStatusBars = true
+
+        binding.tvTotalLabel.setTextColor(Color.GRAY)
+        binding.tvTotalAmount.setTextColor(contrastColor)
 
         binding.etAmount.setTextColor(contrastColor)
         binding.etDescription.setTextColor(contrastColor)

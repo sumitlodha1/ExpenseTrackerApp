@@ -1,26 +1,27 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="Base.Theme.ExpenseTracker" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Palette Stormy Teal: #006d77 -->
         <item name="colorPrimary">#006d77</item>
         <item name="colorOnPrimary">#FFFFFF</item>
         
+        <!-- Palette Pearl Aqua: #83c5be -->
         <item name="colorPrimaryContainer">#83c5be</item>
         <item name="colorOnPrimaryContainer">#002022</item>
         
+        <!-- Palette Tangerine Dream: #e29578 -->
         <item name="colorSecondary">#e29578</item>
         <item name="colorOnSecondary">#FFFFFF</item>
-        <item name="colorSecondaryContainer">#f9d7cc</item>
-        <item name="colorOnSecondaryContainer">#3a0b00</item>
         
+        <!-- Palette Almond Silk: #ffddd2 -->
         <item name="colorSurface">#ffddd2</item>
         <item name="colorOnSurface">#201A18</item>
-        <item name="colorSurfaceVariant">#f5cec2</item>
         
+        <!-- Palette Alice Blue: #edf6f9 -->
         <item name="android:windowBackground">#edf6f9</item>
         
         <item name="colorOutline">#006d77</item>
 
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
-        
         <item name="textInputStyle">@style/Widget.App.TextInputLayout</item>
     </style>
 
@@ -35,11 +36,12 @@
         <item name="cornerSize">28dp</item>
     </style>
 
-    <style name="TextAppearance.App.Toolbar" parent="TextAppearance.Material3.HeadlineLarge">
+    <!-- Super Bold Toolbar Style - Reduced size to fit in one line -->
+    <style name="TextAppearance.App.Toolbar" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif-black</item>
-        <item name="android:textSize">36sp</item>
-        <item name="android:letterSpacing">-0.05</item>
+        <item name="android:textSize">26sp</item>
+        <item name="android:letterSpacing">-0.02</item>
         <item name="android:textColor">#006d77</item>
     </style>
 

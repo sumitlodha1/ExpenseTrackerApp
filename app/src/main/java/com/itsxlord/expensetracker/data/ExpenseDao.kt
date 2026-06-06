@@ -6,14 +6,19 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface ExpenseDao {
     @Transaction
-    @Query("SELECT * FROM expense_notes ORDER BY createdAt DESC")
-    fun getNotesWithItems(): Flow<List<NoteWithItems>>
+    @Query("SELECT * FROM expense_notes WHERE isArchived = 0 AND isDeleted = 0 ORDER BY createdAt DESC")
+    fun getActiveNotesWithItems(): Flow<List<NoteWithItems>>
 
-    @Query("SELECT * FROM expense_notes ORDER BY createdAt DESC")
-    fun getAllNotes(): Flow<List<ExpenseNote>>
+    @Transaction
+    @Query("SELECT * FROM expense_notes WHERE isArchived = 1 AND isDeleted = 0 ORDER BY createdAt DESC")
+    fun getArchivedNotesWithItems(): Flow<List<NoteWithItems>>
+
+    @Transaction
+    @Query("SELECT * FROM expense_notes WHERE isDeleted = 1 ORDER BY deletedAt DESC")
+    fun getDeletedNotesWithItems(): Flow<List<NoteWithItems>>
 
     @Query("SELECT * FROM expense_notes WHERE id = :noteId")
-    fun getNoteById(noteId: Long): Flow<ExpenseNote>
+    fun getNoteById(noteId: Long): Flow<ExpenseNote?>
 
     @Insert
     suspend fun insertNote(note: ExpenseNote): Long
@@ -22,7 +27,10 @@ interface ExpenseDao {
     suspend fun updateNote(note: ExpenseNote)
 
     @Delete
-    suspend fun deleteNote(note: ExpenseNote)
+    suspend fun deleteNotePermanently(note: ExpenseNote)
+
+    @Query("DELETE FROM expense_notes WHERE isDeleted = 1 AND deletedAt < :threshold")
+    suspend fun deleteOldNotes(threshold: Long)
 
     @Query("SELECT * FROM expense_items WHERE noteId = :noteId ORDER BY timestamp DESC")
     fun getItemsForNote(noteId: Long): Flow<List<ExpenseItem>>
